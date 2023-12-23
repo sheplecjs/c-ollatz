@@ -29,18 +29,19 @@ int main() {
         }
         std::cout << collatz << std::endl;
       }
-    } 
+    }
     // if not an integer, check for reserved words
     catch (const std::invalid_argument &e) {
       if (raw_input == "exit") {
         exit = true;
         return 0;
       } else {
-        std::cerr << "Error: " + raw_input + " - input not an integer" << std::endl;
+        std::cerr << "Error: " + raw_input + " - input not an integer"
+                  << std::endl;
       }
     }
     // if outside of GMP range
-    catch (const std::out_of_range& e) {
+    catch (const std::out_of_range &e) {
       std::cerr << "Error: " << e.what() << std::endl;
     }
 
