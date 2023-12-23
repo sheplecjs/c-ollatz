@@ -2,25 +2,39 @@
 #include <iostream>
 
 int main() {
-  std::cout << "Input a positive integer to show its Collatz sequence\n";
 
-  mpz_class collatz;
+  bool exit = false;
 
-  std::cin >> collatz;
+  do {
+    std::cout << "Input a positive integer to show its Collatz sequence or "
+                 "'exit' to quit\n";
 
-  if (std::cin.fail()) {
-    std::cerr << "Must be a positive integer." << std::endl;
-    return 1;
-  }
+    std::string raw_input;
 
-  while (collatz != 1) {
-    if (collatz % 2 == 0) {
-      collatz = collatz / 2;
-    } else {
-      collatz = (collatz * 3) + 1;
+    mpz_class collatz;
+
+    std::cin >> raw_input;
+
+    try {
+      collatz = raw_input;
+      while (collatz != 1) {
+        if (collatz % 2 == 0) {
+          collatz = collatz / 2;
+        } else {
+          collatz = (collatz * 3) + 1;
+        }
+        std::cout << collatz << std::endl;
+      }
+    } catch (const std::invalid_argument &e) {
+      if (raw_input == "exit") {
+        exit = true;
+        return 0;
+      } else {
+        std::cerr << "Error: " << e.what() << std::endl;
+      }
     }
-    std::cout << collatz << std::endl;
-  }
+
+  } while (exit == false);
 
   return 0;
 }
