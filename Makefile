@@ -13,7 +13,8 @@ all: format compile run
 
 ## Compile to binary
 compile:
-	@g++ collatz.cpp -o collatz
+	@g++ -o collatz collatz.cpp -lgmpxx -lgmp
+
 
 ## Run clang-format
 format:
