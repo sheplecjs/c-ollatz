@@ -6,6 +6,9 @@ int main() {
   // condition for ending execution loop
   bool exit = false;
 
+  // step counter
+  int step = 0;
+
   do {
     std::cout << "Input a positive integer to show its Collatz sequence or "
                  "'exit' to quit\n";
@@ -27,7 +30,8 @@ int main() {
         } else {
           collatz = (collatz * 3) + 1;
         }
-        std::cout << collatz << std::endl;
+        std::cout << step << ": " << collatz << std::endl;
+        step += 1;
       }
     }
     // if not an integer, check for reserved words
