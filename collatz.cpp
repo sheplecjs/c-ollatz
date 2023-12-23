@@ -1,9 +1,10 @@
+#include <gmpxx.h>
 #include <iostream>
 
 int main() {
   std::cout << "Input a positive integer to show its Collatz sequence\n";
 
-  int collatz;
+  mpz_class collatz;
 
   std::cin >> collatz;
 
