@@ -3,6 +3,7 @@
 
 int main() {
 
+  // condition for ending execution loop
   bool exit = false;
 
   do {
@@ -15,8 +16,11 @@ int main() {
 
     std::cin >> raw_input;
 
+    // attempt to interpret the input as a GMP integer class
     try {
       collatz = raw_input;
+
+      // print the sequence
       while (collatz != 1) {
         if (collatz % 2 == 0) {
           collatz = collatz / 2;
@@ -25,13 +29,19 @@ int main() {
         }
         std::cout << collatz << std::endl;
       }
-    } catch (const std::invalid_argument &e) {
+    } 
+    // if not an integer, check for reserved words
+    catch (const std::invalid_argument &e) {
       if (raw_input == "exit") {
         exit = true;
         return 0;
       } else {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " + raw_input + " - input not an integer" << std::endl;
       }
+    }
+    // if outside of GMP range
+    catch (const std::out_of_range& e) {
+      std::cerr << "Error: " << e.what() << std::endl;
     }
 
   } while (exit == false);
